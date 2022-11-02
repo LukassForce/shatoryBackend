@@ -10,7 +10,6 @@ var connection = mysql.createConnection({
     database: process.env.DATANAME
 });
 
-
 connection.connect(function(error:any){
 
     if(error){
