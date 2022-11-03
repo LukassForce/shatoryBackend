@@ -13,7 +13,7 @@ import artistRoutes from './routes/artist.routes';
 const app = express();
 
 //settings
-app.set('port', process.env.EXPRESSPORT || process.env.PORT);
+app.set('port', process.env.PORT || 3001);
 
 //middlewares
 app.use(cors());

@@ -15,7 +15,7 @@ const artist_routes_1 = __importDefault(require("./routes/artist.routes"));
 // import dpaRutes from './routes/dpa.routes';
 const app = (0, express_1.default)();
 //settings
-app.set('port', process.env.EXPRESSPORT || process.env.PORT);
+app.set('port', process.env.PORT || 3001);
 //middlewares
 app.use((0, cors_1.default)());
 app.use((0, helmet_1.default)());
