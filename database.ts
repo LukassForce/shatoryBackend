@@ -1,4 +1,4 @@
-require('dotenv').config({ path: "../.env"});
+require('dotenv').config()
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 connection.connect(function(error:any){
 
     if(error){
-        return console.log("[mysql] error: " + error) 
+        return console.log("[mysql]" + error) 
     }
     console.log("[mysql] conexión establecida")
 });

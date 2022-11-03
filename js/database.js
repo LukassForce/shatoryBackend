@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require('dotenv').config({ path: "../.env" });
+require('dotenv').config();
 const mysql = require('mysql');
 var connection = mysql.createConnection({
     host: process.env.HOST,
@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 connection.connect(function (error) {
     if (error) {
-        return console.log("[mysql] error: " + error);
+        return console.log("[mysql]" + error);
     }
     console.log("[mysql] conexión establecida");
 });
