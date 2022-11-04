@@ -5,6 +5,7 @@ import helmet from 'helmet';
 
 import authRoutes from './routes/auth.routes';
 import artistRoutes from './routes/artist.routes';
+import localRoutes from './routes/local.routes';
 // import userRoutes from './routes/user.routes';
 // import ticketRoutes from './routes/ticket.routes';
 // import ticketRepliesRoutes from './routes/ticketReplies.routes';
@@ -30,5 +31,6 @@ app.get('/', (req:any, res:any) => {
 //routes
 app.use('/auth', authRoutes);
 app.use('/artists', artistRoutes);
+app.use('/local', localRoutes);
 
 export default app;

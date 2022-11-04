@@ -9,6 +9,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const helmet_1 = __importDefault(require("helmet"));
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const artist_routes_1 = __importDefault(require("./routes/artist.routes"));
+const local_routes_1 = __importDefault(require("./routes/local.routes"));
 // import userRoutes from './routes/user.routes';
 // import ticketRoutes from './routes/ticket.routes';
 // import ticketRepliesRoutes from './routes/ticketReplies.routes';
@@ -29,4 +30,5 @@ app.get('/', (req, res) => {
 //routes
 app.use('/auth', auth_routes_1.default);
 app.use('/artists', artist_routes_1.default);
+app.use('/local', local_routes_1.default);
 exports.default = app;
