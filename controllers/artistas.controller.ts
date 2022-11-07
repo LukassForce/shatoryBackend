@@ -23,7 +23,7 @@ export function getAllArtists(req:any, res:any){
 
     try {
 
-        connection.query("SELECT nombreArtista, descripcion, linkImagen FROM artista", function (error:any, results:any){
+        connection.query("SELECT * FROM artista", function (error:any, results:any){
 
             if(error) {throw error;}
             if (!results.length) return res.status(400).json({ message: "No existe informacion de artistas" });

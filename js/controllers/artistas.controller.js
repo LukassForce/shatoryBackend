@@ -23,7 +23,7 @@ function createArtist(req, res) {
 exports.createArtist = createArtist;
 function getAllArtists(req, res) {
     try {
-        database_1.default.query("SELECT nombreArtista, descripcion, linkImagen FROM artista", function (error, results) {
+        database_1.default.query("SELECT * FROM artista", function (error, results) {
             if (error) {
                 throw error;
             }
