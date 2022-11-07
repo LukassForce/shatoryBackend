@@ -7,7 +7,7 @@ exports.updateLocal = exports.getLocalByName = exports.getAllLocals = exports.cr
 const database_1 = __importDefault(require("../database"));
 function createLocal(req, res) {
     try {
-        const newLocal = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial };
+        const newLocal = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen };
         database_1.default.query("INSERT INTO local SET ?", [newLocal], function (error, results) {
             if (error)
                 throw error;
@@ -57,7 +57,7 @@ function getLocalByName(req, res) {
 }
 exports.getLocalByName = getLocalByName;
 function updateLocal(req, res) {
-    const updateLocal = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial };
+    const updateLocal = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen };
     let idLocal = req.param.idLocal;
     database_1.default.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_, results) => {
         if (!results) {

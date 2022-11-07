@@ -5,7 +5,7 @@ export function createLocal(req: any, res: any) {
 
     try {
 
-        const newLocal: Local = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial};
+        const newLocal: Local = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen};
 
         connection.query("INSERT INTO local SET ?", [newLocal], function (error: any, results: any) {
             
@@ -57,7 +57,7 @@ export function getLocalByName(req:any, res:any){
 
 export function updateLocal(req:any, res:any){
 
-    const updateLocal: Local = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial};
+    const updateLocal: Local = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen};
     let idLocal:number = req.param.idLocal;
 
     connection.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_:any, results:any) => {

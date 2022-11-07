@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateArtistById = exports.deleteArtistById = exports.getArtistsByName = exports.getAllArtists = exports.createArtist = void 0;
+exports.updateArtistById = exports.deleteArtistById = exports.getArtistsById = exports.getAllArtists = exports.createArtist = void 0;
 const database_1 = __importDefault(require("../database"));
 function createArtist(req, res) {
     try {
@@ -40,10 +40,10 @@ function getAllArtists(req, res) {
     }
 }
 exports.getAllArtists = getAllArtists;
-function getArtistsByName(req, res) {
-    let nameArtist = req.body.nombreArtista;
+function getArtistsById(req, res) {
+    let idArtist = req.param.id;
     try {
-        database_1.default.query('CALL getArtistByName(?)', [nameArtist], (error, results) => {
+        database_1.default.query('CALL getArtistById(?)', [idArtist], (error, results) => {
             res.status(200).send(results[0]);
         });
     }
@@ -51,11 +51,11 @@ function getArtistsByName(req, res) {
         return res.status(500).json(error);
     }
 }
-exports.getArtistsByName = getArtistsByName;
+exports.getArtistsById = getArtistsById;
 function deleteArtistById(req, res) {
     let id = req.params.id;
     try {
-        database_1.default.query('Delete * from artista where id = ?'[id], (error, results) => {
+        database_1.default.query("Delete FROM artista where idArtista = ?", [id], (error, results) => {
             res.status(200).json({ message: "Artista eliminado correctamente" });
         });
     }
@@ -69,10 +69,11 @@ function updateArtistById(req, res) {
     const updatedArtist = { nombreArtista: req.body.nombreArtista, descripcion: req.body.descripcion, linkImagen: req.body.linkImagen };
     try {
         database_1.default.query("UPDATE artista SET ? WHERE ID = ?", [updatedArtist, id], (req_, results) => {
-            res.status(200).send(`Ticket actualizado!`);
+            res.status(200).send('Artista actualizado');
         });
     }
     catch (error) {
+        return res.status(500).json(error);
     }
 }
 exports.updateArtistById = updateArtistById;

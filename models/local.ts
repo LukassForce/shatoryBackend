@@ -3,4 +3,5 @@ export interface Local {
     direccion:string;
     contacto:string;
     redSocial:string;
+    linkImagen:string
 }

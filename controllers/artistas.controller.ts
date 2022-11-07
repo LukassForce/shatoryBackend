@@ -37,11 +37,11 @@ export function getAllArtists(req:any, res:any){
     }
 }
 
-export function getArtistsByName(req:any, res:any){
+export function getArtistsById(req:any, res:any){
 
-    let nameArtist = req.body.nombreArtista;
+    let idArtist = req.param.id;
     try {
-        connection.query('CALL getArtistByName(?)', [nameArtist], (error:any, results:any) =>{
+        connection.query('CALL getArtistById(?)', [idArtist], (error:any, results:any) =>{
             res.status(200).send(results[0]);
         });
 
@@ -54,8 +54,9 @@ export function getArtistsByName(req:any, res:any){
 export function deleteArtistById(req:any, res:any){
     
     let id:number = req.params.id;
+    
     try {
-        connection.query('Delete * from artista where id = ?' [id], (error:any, results:any) => {
+        connection.query("Delete FROM artista where idArtista = ?", [id], (error:any, results:any) => {
 
             res.status(200).json({message: "Artista eliminado correctamente"});
         });
@@ -69,14 +70,14 @@ export function updateArtistById(req:any, res:any) {
 
     let id:number = req.params.id;
     const updatedArtist:any = { nombreArtista:req.body.nombreArtista, descripcion:req.body.descripcion, linkImagen:req.body.linkImagen };
-
+    
     try {
         
         connection.query("UPDATE artista SET ? WHERE ID = ?", [updatedArtist, id], (req_:any, results:any) => {
-            res.status(200).send(`Ticket actualizado!`);
+            res.status(200).send('Artista actualizado');
         });
         
     } catch (error) {
-        
+        return res.status(500).json(error);
     }
 }
