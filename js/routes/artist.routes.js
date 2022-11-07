@@ -28,7 +28,7 @@ const router = (0, express_1.Router)();
 const artistController = __importStar(require("../controllers/artistas.controller"));
 router.post('/', artistController.createArtist);
 router.get('/', artistController.getAllArtists);
-router.get('/getArtistByName', artistController.getArtistsByName);
+router.get('/getArtistByName', artistController.getArtistsById);
 router.delete('/:id', artistController.deleteArtistById);
 router.put('/:id', artistController.updateArtistById);
 exports.default = router;
