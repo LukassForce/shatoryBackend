@@ -39,7 +39,7 @@ export function getAllArtists(req:any, res:any){
 
 export function getArtistsById(req:any, res:any){
 
-    let idArtist = req.param.id;
+    let idArtist = req.params.id;
     try {
         connection.query('CALL getArtistById(?)', [idArtist], (error:any, results:any) =>{
             res.status(200).send(results[0]);

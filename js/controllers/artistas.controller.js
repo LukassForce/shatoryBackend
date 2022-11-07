@@ -41,7 +41,7 @@ function getAllArtists(req, res) {
 }
 exports.getAllArtists = getAllArtists;
 function getArtistsById(req, res) {
-    let idArtist = req.param.id;
+    let idArtist = req.params.id;
     try {
         database_1.default.query('CALL getArtistById(?)', [idArtist], (error, results) => {
             res.status(200).send(results[0]);
