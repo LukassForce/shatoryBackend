@@ -56,7 +56,7 @@ function deleteArtistById(req, res) {
     let id = req.params.id;
     try {
         database_1.default.query('Delete * from artista where id = ?'[id], (error, results) => {
-            res.status(200).json({ message: "Artista elimindao correctamente" });
+            res.status(200).json({ message: "Artista eliminado correctamente" });
         });
     }
     catch (error) {
@@ -68,8 +68,8 @@ function updateArtistById(req, res) {
     let id = req.params.id;
     const updatedArtist = { nombreArtista: req.body.nombreArtista, descripcion: req.body.descripcion, linkImagen: req.body.linkImagen };
     try {
-        database_1.default.query("UPDATE tickets SET ? WHERE ID = ?", [updatedArtist, id], (req_, results) => {
-            res.status(204).send(`Ticket actualizado!`);
+        database_1.default.query("UPDATE artista SET ? WHERE ID = ?", [updatedArtist, id], (req_, results) => {
+            res.status(200).send(`Ticket actualizado!`);
         });
     }
     catch (error) {

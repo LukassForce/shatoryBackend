@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listar = exports.signIn = exports.signUp = void 0;
+exports.addFav = exports.listar = exports.signIn = exports.signUp = void 0;
 const database_1 = __importDefault(require("../database"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require('dotenv').config();
@@ -102,3 +102,20 @@ const listar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.listar = listar;
+function addFav(req, res) {
+    let idUser = req.body.idUser;
+    let idArtist = req.body.idArtist;
+    let data = [idUser, idArtist];
+    try {
+        database_1.default.query("INSERT INTO Favorito SET ?", data, (error, results) => {
+            if (error)
+                throw error;
+            res.status(201).json({ message: "Agregado a favorito correctamente" });
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+exports.addFav = addFav;

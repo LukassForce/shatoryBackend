@@ -57,7 +57,7 @@ export function deleteArtistById(req:any, res:any){
     try {
         connection.query('Delete * from artista where id = ?' [id], (error:any, results:any) => {
 
-            res.status(200).json({message: "Artista elimindao correctamente"});
+            res.status(200).json({message: "Artista eliminado correctamente"});
         });
     } catch (error) {
         
@@ -72,8 +72,8 @@ export function updateArtistById(req:any, res:any) {
 
     try {
         
-        connection.query("UPDATE tickets SET ? WHERE ID = ?", [updatedArtist, id], (req_:any, results:any) => {
-            res.status(204).send(`Ticket actualizado!`);
+        connection.query("UPDATE artista SET ? WHERE ID = ?", [updatedArtist, id], (req_:any, results:any) => {
+            res.status(200).send(`Ticket actualizado!`);
         });
         
     } catch (error) {

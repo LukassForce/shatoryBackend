@@ -7,7 +7,7 @@ import * as passwordEncryptor from '../utils/passwordEncryptor'
 export const signUp = async (req: any, res: any) => {
 
     try {
-        
+
         const newUser: User = { name: req.body.name, lastname: req.body.lastname, password: req.body.password, email: req.body.email, rut: req.body.rut };
 
         newUser.password = await passwordEncryptor.encryptPassword(req.body.password);
@@ -70,6 +70,7 @@ export const listar = async (req: any, res: any) => {
         connection.query("SELECT * FROM `usuario`", (error: any, results: any) => {
 
             if (!results) {
+
                 res.status(400).send('No existe informacion');
             }
             res.status(200).send(results);
@@ -77,6 +78,27 @@ export const listar = async (req: any, res: any) => {
 
     }
     catch (error) {
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+
+export function addFav(req: any, res: any) {
+
+    let idUser = req.body.idUser;
+    let idArtist = req.body.idArtist;
+    let data = [idUser, idArtist];
+
+    try {
+
+        connection.query("INSERT INTO Favorito SET ?", data, (error: any, results: any) => {
+
+            if (error) throw error;
+            res.status(201).json({ message: "Agregado a favorito correctamente" })
+        })
+
+    } catch (error) {
+
         console.log(error);
         return res.status(500).json(error);
     }
