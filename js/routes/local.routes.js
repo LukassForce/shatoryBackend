@@ -28,7 +28,7 @@ const router = (0, express_1.Router)();
 const localController = __importStar(require("../controllers/local.controller"));
 router.get('/', localController.getAllLocals);
 router.post('/', localController.createLocal);
-router.post('/getByName', localController.getLocalByName);
+router.get('/:idLocal', localController.getLocalById);
 // router.get('/', artistController.getAllArtists);
 // router.get('/getByName', artistController.getArtistsByName);
 // router.delete('/:id', artistController.deleteArtistById);

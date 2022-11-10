@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateLocal = exports.getLocalByName = exports.getAllLocals = exports.createLocal = void 0;
+exports.updateLocal = exports.getLocalById = exports.getAllLocals = exports.createLocal = void 0;
 const database_1 = __importDefault(require("../database"));
 function createLocal(req, res) {
     try {
@@ -49,14 +49,10 @@ function getAllLocals(req, res) {
     }
 }
 exports.getAllLocals = getAllLocals;
-function getLocalByName(req, res) {
-    let localName = req.body.localName;
+function getLocalById(req, res) {
+    let idLocal = req.params.idLocal;
     try {
-        database_1.default.query('SELECT * FROM local WHERE nombre = ?', [localName], (error, results) => {
-            if (error)
-                throw error;
-            if (!results.length)
-                return res.status(400).json({ message: "No existe local con el nombre ingresado" });
+        database_1.default.query('select * from local where idLocal = ?', [idLocal], (error, results) => {
             res.status(200).send(results[0]);
         });
     }
@@ -64,7 +60,7 @@ function getLocalByName(req, res) {
         return res.status(500).json(error);
     }
 }
-exports.getLocalByName = getLocalByName;
+exports.getLocalById = getLocalById;
 function updateLocal(req, res) {
     const updateLocal = {
         nombre: req.body.nombre,

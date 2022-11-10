@@ -47,14 +47,12 @@ export function getAllLocals(req: any, res: any) {
     }
 }
 
-export function getLocalByName(req: any, res: any) {
+export function getLocalById(req: any, res: any) {
 
-    let localName = req.body.localName;
+    let idLocal = req.params.idLocal;
 
     try {
-        connection.query('SELECT * FROM local WHERE nombre = ?', [localName], (error: any, results: any) => {
-            if (error) throw error;
-            if (!results.length) return res.status(400).json({ message: "No existe local con el nombre ingresado" })
+        connection.query('select * from local where idLocal = ?', [idLocal], (error: any, results: any) => {
             res.status(200).send(results[0]);
         });
 
