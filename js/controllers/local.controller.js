@@ -7,7 +7,16 @@ exports.updateLocal = exports.getLocalByName = exports.getAllLocals = exports.cr
 const database_1 = __importDefault(require("../database"));
 function createLocal(req, res) {
     try {
-        const newLocal = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen };
+        const newLocal = {
+            nombre: req.body.nombre,
+            direccion: req.body.direccion,
+            contacto: req.body.contacto,
+            web: req.body.web,
+            facebook: req.body.facebook,
+            instagram: req.body.instagram,
+            twitter: req.body.twitter,
+            linkImagen: req.body.linkImagen
+        };
         database_1.default.query("INSERT INTO local SET ?", [newLocal], function (error, results) {
             if (error)
                 throw error;
@@ -23,7 +32,7 @@ function createLocal(req, res) {
 exports.createLocal = createLocal;
 function getAllLocals(req, res) {
     try {
-        database_1.default.query("SELECT nombre, direccion, contacto, redSocial FROM local", function (error, results) {
+        database_1.default.query("SELECT * FROM local", function (error, results) {
             if (error) {
                 throw error;
             }
@@ -57,7 +66,16 @@ function getLocalByName(req, res) {
 }
 exports.getLocalByName = getLocalByName;
 function updateLocal(req, res) {
-    const updateLocal = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen };
+    const updateLocal = {
+        nombre: req.body.nombre,
+        direccion: req.body.direccion,
+        contacto: req.body.contacto,
+        web: req.body.web,
+        facebook: req.body.facebook,
+        instagram: req.body.instagram,
+        twitter: req.body.twitter,
+        linkImagen: req.body.linkImagen
+    };
     let idLocal = req.param.idLocal;
     database_1.default.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_, results) => {
         if (!results) {

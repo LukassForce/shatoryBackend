@@ -56,6 +56,8 @@ function deleteArtistById(req, res) {
     let id = req.params.id;
     try {
         database_1.default.query("Delete FROM artista where idArtista = ?", [id], (error, results) => {
+            if (error)
+                throw error;
             res.status(200).json({ message: "Artista eliminado correctamente" });
         });
     }

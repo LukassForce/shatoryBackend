@@ -57,7 +57,8 @@ export function deleteArtistById(req:any, res:any){
     
     try {
         connection.query("Delete FROM artista where idArtista = ?", [id], (error:any, results:any) => {
-
+            
+            if(error) throw error;
             res.status(200).json({message: "Artista eliminado correctamente"});
         });
     } catch (error) {

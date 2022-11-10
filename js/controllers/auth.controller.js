@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addFav = exports.listar = exports.signIn = exports.signUp = void 0;
+exports.getFavByRut = exports.addFav = exports.listar = exports.signIn = exports.signUp = void 0;
 const database_1 = __importDefault(require("../database"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require('dotenv').config();
@@ -74,9 +74,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 return res.status(401).json({ token: null, message: "¡La contraseña que has introducido es incorrecta!" });
             const selectedUser = results[0];
             if (process.env.API_KEY) {
-                const token = jsonwebtoken_1.default.sign({ id: selectedUser.rut }, process.env.API_KEY, {
-                    expiresIn: 86400,
-                });
+                const token = jsonwebtoken_1.default.sign({ id: selectedUser.rut }, process.env.API_KEY);
                 res.status(200).json({ token });
             }
         }));
@@ -103,11 +101,10 @@ const listar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.listar = listar;
 function addFav(req, res) {
-    let idUser = req.body.idUser;
+    let rutUser = req.body.rutUser;
     let idArtist = req.body.idArtist;
-    let data = [idUser, idArtist];
     try {
-        database_1.default.query("INSERT INTO Favorito SET ?", data, (error, results) => {
+        database_1.default.query("INSERT INTO Favorito (rutUser, idArtista) VALUES (?, ?)", [rutUser, idArtist], (error, results) => {
             if (error)
                 throw error;
             res.status(201).json({ message: "Agregado a favorito correctamente" });
@@ -119,3 +116,18 @@ function addFav(req, res) {
     }
 }
 exports.addFav = addFav;
+function getFavByRut(req, res) {
+    let rutUser = req.body.rutUser;
+    try {
+        database_1.default.query("Select * FROM Favorito where rut = ?", [rutUser], (error, results) => {
+            if (error)
+                throw error;
+            res.status(201).send(results);
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+exports.getFavByRut = getFavByRut;

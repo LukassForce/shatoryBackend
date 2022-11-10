@@ -5,13 +5,22 @@ export function createLocal(req: any, res: any) {
 
     try {
 
-        const newLocal: Local = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen};
+        const newLocal: Local = {
+            nombre: req.body.nombre, 
+            direccion: req.body.direccion,
+            contacto: req.body.contacto, 
+            web: req.body.web, 
+            facebook: req.body.facebook, 
+            instagram: req.body.instagram,
+            twitter: req.body.twitter, 
+            linkImagen: req.body.linkImagen
+        };
 
         connection.query("INSERT INTO local SET ?", [newLocal], function (error: any, results: any) {
-            
+
             if (error) throw error;
             else
-            res.status(201).json({ message: "Local creado correctamente" });
+                res.status(201).json({ message: "Local creado correctamente" });
         });
     }
     catch (error) {
@@ -20,13 +29,13 @@ export function createLocal(req: any, res: any) {
     }
 }
 
-export function getAllLocals(req:any, res:any){
+export function getAllLocals(req: any, res: any) {
 
     try {
 
-        connection.query("SELECT nombre, direccion, contacto, redSocial FROM local", function (error:any, results:any){
+        connection.query("SELECT * FROM local", function (error: any, results: any) {
 
-            if(error) {throw error;}
+            if (error) { throw error; }
             if (!results.length) return res.status(400).json({ message: "No existe informacion de locales" });
             else { res.status(200).send(results); }
         })
@@ -38,14 +47,14 @@ export function getAllLocals(req:any, res:any){
     }
 }
 
-export function getLocalByName(req:any, res:any){
+export function getLocalByName(req: any, res: any) {
 
     let localName = req.body.localName;
 
     try {
-        connection.query('CALL getArtistByName(?)', [localName], (error:any, results:any) =>{
+        connection.query('CALL getArtistByName(?)', [localName], (error: any, results: any) => {
             if (error) throw error;
-            if (!results.length) return res.status(400).json({message: "No existe local con el nombre ingresado"})
+            if (!results.length) return res.status(400).json({ message: "No existe local con el nombre ingresado" })
             res.status(200).send(results[0]);
         });
 
@@ -55,17 +64,26 @@ export function getLocalByName(req:any, res:any){
     }
 }
 
-export function updateLocal(req:any, res:any){
+export function updateLocal(req: any, res: any) {
 
-    const updateLocal: Local = { nombre: req.body.nombre, direccion: req.body.direccion, contacto: req.body.contacto, redSocial: req.body.redSocial, linkImagen: req.body.linkImagen};
-    let idLocal:number = req.param.idLocal;
+    const updateLocal: Local = { 
 
-    connection.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_:any, results:any) => {
+        nombre: req.body.nombre, 
+        direccion: req.body.direccion,
+        contacto: req.body.contacto, 
+        web: req.body.web, 
+        facebook: req.body.facebook, 
+        instagram: req.body.instagram,
+        twitter: req.body.twitter, 
+        linkImagen: req.body.linkImagen 
+    };
+
+    let idLocal: number = req.param.idLocal;
+
+    connection.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_: any, results: any) => {
         if (!results) {
             res.status(400).send('No existe informacion del local.');
         }
         res.status(200).send(`Local Actualizado correctamente`);
     });
-
-
 }
