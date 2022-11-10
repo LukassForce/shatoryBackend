@@ -52,7 +52,7 @@ exports.getAllLocals = getAllLocals;
 function getLocalByName(req, res) {
     let localName = req.body.localName;
     try {
-        database_1.default.query('CALL getArtistByName(?)', [localName], (error, results) => {
+        database_1.default.query('SELECT * FROM local WHERE nombre = ?', [localName], (error, results) => {
             if (error)
                 throw error;
             if (!results.length)

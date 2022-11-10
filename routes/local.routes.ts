@@ -5,7 +5,7 @@ import * as localController from '../controllers/local.controller'
 
 router.get('/', localController.getAllLocals);
 router.post('/', localController.createLocal);
-// router.post('/', artistController.createArtist);
+router.post('/getByName', localController.getLocalByName);
 // router.get('/', artistController.getAllArtists);
 // router.get('/getByName', artistController.getArtistsByName);
 // router.delete('/:id', artistController.deleteArtistById);

@@ -52,7 +52,7 @@ export function getLocalByName(req: any, res: any) {
     let localName = req.body.localName;
 
     try {
-        connection.query('CALL getArtistByName(?)', [localName], (error: any, results: any) => {
+        connection.query('SELECT * FROM local WHERE nombre = ?', [localName], (error: any, results: any) => {
             if (error) throw error;
             if (!results.length) return res.status(400).json({ message: "No existe local con el nombre ingresado" })
             res.status(200).send(results[0]);
