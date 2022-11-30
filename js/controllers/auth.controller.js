@@ -42,7 +42,13 @@ require('dotenv').config();
 const passwordEncryptor = __importStar(require("../utils/passwordEncryptor"));
 const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newUser = { name: req.body.name, lastname: req.body.lastname, password: req.body.password, email: req.body.email, rut: req.body.rut };
+        const newUser = {
+            name: req.body.name,
+            lastName: req.body.lastName,
+            password: req.body.password,
+            email: req.body.email,
+            rut: req.body.rut
+        };
         newUser.password = yield passwordEncryptor.encryptPassword(req.body.password);
         database_1.default.query("INSERT INTO usuario SET ?", [newUser], function (error, results) {
             if (error)
@@ -50,7 +56,7 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (process.env.API_KEY) {
                 newUser.rut = results.insertId;
                 const token = jsonwebtoken_1.default.sign({ id: newUser.rut }, process.env.API_KEY, {
-                    expiresIn: 86400,
+                    expiresIn: "7d",
                 });
                 res.status(201).json({ token });
             }
@@ -74,7 +80,9 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 return res.status(401).json({ token: null, message: "¡La contraseña que has introducido es incorrecta!" });
             const selectedUser = results[0];
             if (process.env.API_KEY) {
-                const token = jsonwebtoken_1.default.sign({ id: selectedUser.rut }, process.env.API_KEY);
+                const token = jsonwebtoken_1.default.sign({ id: selectedUser.rut }, process.env.API_KEY, {
+                    expiresIn: "7d",
+                });
                 res.status(200).json({ token });
             }
         }));

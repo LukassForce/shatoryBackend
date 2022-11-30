@@ -90,17 +90,17 @@ export function updateArtistById(req: any, res: any) {
 export function getRandomArtists(req: any, res: any) {
 
     try {
+        
+        connection.query("select * from artista order by rand() limit 3;", (error: any, results: any) => {
 
-        connection.query("CALL getRandomArtists()", function (error: any, results: any) {
+            console.log(results);
+        
+            res.status(200).send(results);
 
-            if (error) { throw error; }
-            if (!results.length) return res.status(400).json({ message: "No existe informacion de artistas" });
-            else { res.status(200).send(results); }
-        })
+        });
 
     } catch (error) {
-
-        console.log(error);
-        return res.status(500).json(error)
+            
+        return res.status(500).json(error);
     }
 }

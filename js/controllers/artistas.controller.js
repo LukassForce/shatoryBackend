@@ -3,11 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateArtistById = exports.deleteArtistById = exports.getArtistsById = exports.getAllArtists = exports.createArtist = void 0;
+exports.getRandomArtists = exports.updateArtistById = exports.deleteArtistById = exports.getArtistsById = exports.getAllArtists = exports.createArtist = void 0;
 const database_1 = __importDefault(require("../database"));
 function createArtist(req, res) {
     try {
-        const newArtist = { nombreArtista: req.body.nombreArtista, descripcion: req.body.descripcion, linkImagen: req.body.linkImagen };
+        const newArtist = {
+            nombreArtista: req.body.nombreArtista,
+            descripcion: req.body.descripcion,
+            linkImagen: req.body.linkImagen
+        };
         database_1.default.query("INSERT INTO artista SET ?", [newArtist], function (error, results) {
             if (error)
                 throw error;
@@ -79,3 +83,15 @@ function updateArtistById(req, res) {
     }
 }
 exports.updateArtistById = updateArtistById;
+function getRandomArtists(req, res) {
+    try {
+        database_1.default.query("select * from artista order by rand() limit 3;", (error, results) => {
+            console.log(results);
+            res.status(200).send(results);
+        });
+    }
+    catch (error) {
+        return res.status(500).json(error);
+    }
+}
+exports.getRandomArtists = getRandomArtists;
