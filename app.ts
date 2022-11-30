@@ -21,11 +21,11 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-    
+app.use(express.urlencoded({ extended: false }));
+
 //hello world
-app.get('/', (req:any, res:any) => {
-    return res.status(200).json({ message: 'Hello World!'});
+app.get('/', (req: any, res: any) => {
+    return res.status(200).json({ message: 'Hello World!' });
 });
 
 //routes

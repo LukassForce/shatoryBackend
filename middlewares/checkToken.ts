@@ -39,7 +39,7 @@ export const isAdmin = async (req: any, res: any, next: any) => {
         });
     }
     catch (error) {
-        
+
         return res.status(500).json(error);
     }
 }

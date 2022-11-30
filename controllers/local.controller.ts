@@ -6,21 +6,21 @@ export function createLocal(req: any, res: any) {
     try {
 
         const newLocal: Local = {
-            nombre: req.body.nombre, 
+            
+            nombre: req.body.nombre,
             direccion: req.body.direccion,
-            contacto: req.body.contacto, 
-            web: req.body.web, 
-            facebook: req.body.facebook, 
+            contacto: req.body.contacto,
+            web: req.body.web,
+            facebook: req.body.facebook,
             instagram: req.body.instagram,
-            twitter: req.body.twitter, 
+            twitter: req.body.twitter,
             linkImagen: req.body.linkImagen
         };
 
         connection.query("INSERT INTO local SET ?", [newLocal], function (error: any, results: any) {
 
             if (error) throw error;
-            else
-                res.status(201).json({ message: "Local creado correctamente" });
+            else res.status(201).json({ message: "Local creado correctamente" });
         });
     }
     catch (error) {
@@ -52,7 +52,9 @@ export function getLocalById(req: any, res: any) {
     let idLocal = req.params.idLocal;
 
     try {
+
         connection.query('select * from local where idLocal = ?', [idLocal], (error: any, results: any) => {
+
             res.status(200).send(results[0]);
         });
 
@@ -64,21 +66,22 @@ export function getLocalById(req: any, res: any) {
 
 export function updateLocal(req: any, res: any) {
 
-    const updateLocal: Local = { 
+    const updateLocal: Local = {
 
-        nombre: req.body.nombre, 
+        nombre: req.body.nombre,
         direccion: req.body.direccion,
-        contacto: req.body.contacto, 
-        web: req.body.web, 
-        facebook: req.body.facebook, 
+        contacto: req.body.contacto,
+        web: req.body.web,
+        facebook: req.body.facebook,
         instagram: req.body.instagram,
-        twitter: req.body.twitter, 
-        linkImagen: req.body.linkImagen 
+        twitter: req.body.twitter,
+        linkImagen: req.body.linkImagen
     };
 
     let idLocal: number = req.param.idLocal;
 
     connection.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_: any, results: any) => {
+
         if (!results) {
             res.status(400).send('No existe informacion del local.');
         }
