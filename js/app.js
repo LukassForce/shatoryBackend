@@ -11,6 +11,7 @@ const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const artist_routes_1 = __importDefault(require("./routes/artist.routes"));
 const local_routes_1 = __importDefault(require("./routes/local.routes"));
 const favorite_routes_1 = __importDefault(require("./routes/favorite.routes"));
+const evento_routes_1 = __importDefault(require("./routes/evento.routes"));
 const app = (0, express_1.default)();
 //settings
 app.set('port', process.env.PORT || 3001);
@@ -29,4 +30,5 @@ app.use('/auth', auth_routes_1.default);
 app.use('/artists', artist_routes_1.default);
 app.use('/local', local_routes_1.default);
 app.use('/favorites', favorite_routes_1.default);
+app.use('/eventos', evento_routes_1.default);
 exports.default = app;

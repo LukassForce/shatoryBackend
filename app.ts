@@ -7,7 +7,7 @@ import authRoutes from './routes/auth.routes';
 import artistRoutes from './routes/artist.routes';
 import localRoutes from './routes/local.routes';
 import favoriteRoutes from './routes/favorite.routes';
-
+import eventoRoutes from './routes/evento.routes';
 
 const app = express();
 
@@ -31,5 +31,6 @@ app.use('/auth', authRoutes);
 app.use('/artists', artistRoutes);
 app.use('/local', localRoutes);
 app.use('/favorites', favoriteRoutes);
+app.use('/eventos', eventoRoutes);
 
 export default app;
