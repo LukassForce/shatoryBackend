@@ -22,11 +22,11 @@ export function addFav(req: any, res: any) {
 
 export function getFavByRut(req: any, res: any) {
 
-    let rutUser = req.body.rutUser;
+    let rutUser = req.params.rut;
 
     try {
 
-        connection.query("Select * FROM Favorito where rut = ?", [rutUser], (error: any, results: any) => {
+        connection.query("Select * FROM Favorito where rutUser = ?", [rutUser], (error: any, results: any) => {
 
             if (error) throw error;
             res.status(201).send(results)
