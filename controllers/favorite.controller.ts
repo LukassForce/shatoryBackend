@@ -26,7 +26,7 @@ export function getFavByRut(req: any, res: any) {
 
     try {
 
-        connection.query("Select * FROM Favorito where rutUser = ?", [rutUser], (error: any, results: any) => {
+        connection.query("CALL getFavoritesByRut(?)", [rutUser], (error: any, results: any) => {
 
             if (error) throw error;
             res.status(201).send(results)
