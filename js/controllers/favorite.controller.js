@@ -27,7 +27,7 @@ function getFavByRut(req, res) {
         database_1.default.query("CALL getFavoritesByRut(?)", [rutUser], (error, results) => {
             if (error)
                 throw error;
-            res.status(201).send(results);
+            res.status(201).send(results[0]);
         });
     }
     catch (error) {

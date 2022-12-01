@@ -23,13 +23,15 @@ export function addFav(req: any, res: any) {
 export function getFavByRut(req: any, res: any) {
 
     let rutUser = req.params.rut;
+    
 
     try {
 
         connection.query("CALL getFavoritesByRut(?)", [rutUser], (error: any, results: any) => {
 
             if (error) throw error;
-            res.status(201).send(results)
+            
+            res.status(201).send(results[0])
         })
 
     } catch (error) {
