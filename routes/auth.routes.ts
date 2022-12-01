@@ -9,7 +9,7 @@ router.post('/signIn', authController.signIn);
 router.post('/signUp', [checkSignUp.checkDuplicateUser], authController.signUp);
 //router.get('/profile', [checkToken.checkToken], authController.getProfile);
 router.get('/getAllProfile', authController.listar);
-router.post('/addFavorite', authController.addFav);
-router.get('/getFavorite/:rut', authController.getFavByRut);
+
+router.get('/getProfile', [checkToken.checkToken], authController.getProfile);
 
 export default router;

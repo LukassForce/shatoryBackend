@@ -8,13 +8,13 @@ export const signUp = async (req: any, res: any) => {
 
     try {
 
-        const newUser: User = { 
+        const newUser: User = {
 
             name: req.body.name,
-            lastName: req.body.lastName, 
-            password: req.body.password, 
-            email: req.body.email, 
-            rut: req.body.rut 
+            lastName: req.body.lastName,
+            password: req.body.password,
+            email: req.body.email,
+            rut: req.body.rut
         };
 
         newUser.password = await passwordEncryptor.encryptPassword(req.body.password);
@@ -54,13 +54,32 @@ export const signIn = async (req: any, res: any) => {
 
             if (process.env.API_KEY) {
 
-                const token = jwt.sign({ id: selectedUser.rut }, process.env.API_KEY,{
+                const token = jwt.sign({ id: selectedUser.rut }, process.env.API_KEY, {
                     expiresIn: "7d",
                 })
 
                 res.status(200).json({ token });
             }
         });
+    }
+    catch (error) {
+
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+
+export function getProfile(req: any, res: any) {
+
+    const profileRut = req.userId
+    try {
+
+        connection.query("SELECT * FROM usuario WHERE rut = ?", [profileRut], (error: any, results: any) => {
+
+            if (error) throw error;
+            if (!results.length) return res.status(400).json({ message: "¡El usuario no existe!" });
+            else { res.status(200).send(results); }
+        })
     }
     catch (error) {
 
@@ -84,45 +103,6 @@ export const listar = async (req: any, res: any) => {
 
     }
     catch (error) {
-        console.log(error);
-        return res.status(500).json(error);
-    }
-}
-
-export function addFav(req: any, res: any) {
-
-    let rutUser = req.body.rutUser;
-    let idArtist = req.body.idArtist;
-
-    try {
-
-        connection.query("INSERT INTO Favorito (rutUser, idArtista) VALUES (?, ?)", [rutUser, idArtist], (error: any, results: any) => {
-
-            if (error) throw error;
-            res.status(201).json({ message: "Agregado a favorito correctamente" })
-        })
-
-    } catch (error) {
-
-        console.log(error);
-        return res.status(500).json(error);
-    }
-}
-
-export function getFavByRut(req: any, res: any) {
-
-    let rutUser = req.body.rutUser;
-
-    try {
-
-        connection.query("Select * FROM Favorito where rut = ?", [rutUser], (error: any, results: any) => {
-
-            if (error) throw error;
-            res.status(201).send(results)
-        })
-
-    } catch (error) {
-
         console.log(error);
         return res.status(500).json(error);
     }

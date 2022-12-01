@@ -6,10 +6,8 @@ import helmet from 'helmet';
 import authRoutes from './routes/auth.routes';
 import artistRoutes from './routes/artist.routes';
 import localRoutes from './routes/local.routes';
-// import userRoutes from './routes/user.routes';
-// import ticketRoutes from './routes/ticket.routes';
-// import ticketRepliesRoutes from './routes/ticketReplies.routes';
-// import dpaRutes from './routes/dpa.routes';
+import favoriteRoutes from './routes/favorite.routes';
+
 
 const app = express();
 
@@ -32,5 +30,6 @@ app.get('/', (req: any, res: any) => {
 app.use('/auth', authRoutes);
 app.use('/artists', artistRoutes);
 app.use('/local', localRoutes);
+app.use('/favorites', favoriteRoutes);
 
 export default app;

@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFavByRut = exports.addFav = exports.listar = exports.signIn = exports.signUp = void 0;
+exports.listar = exports.getProfile = exports.signIn = exports.signUp = void 0;
 const database_1 = __importDefault(require("../database"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require('dotenv').config();
@@ -93,6 +93,25 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signIn = signIn;
+function getProfile(req, res) {
+    const profileRut = req.userId;
+    try {
+        database_1.default.query("SELECT * FROM usuario WHERE rut = ?", [profileRut], (error, results) => {
+            if (error)
+                throw error;
+            if (!results.length)
+                return res.status(400).json({ message: "¡El usuario no existe!" });
+            else {
+                res.status(200).send(results);
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+exports.getProfile = getProfile;
 const listar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         database_1.default.query("SELECT * FROM `usuario`", (error, results) => {
@@ -108,34 +127,3 @@ const listar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.listar = listar;
-function addFav(req, res) {
-    let rutUser = req.body.rutUser;
-    let idArtist = req.body.idArtist;
-    try {
-        database_1.default.query("INSERT INTO Favorito (rutUser, idArtista) VALUES (?, ?)", [rutUser, idArtist], (error, results) => {
-            if (error)
-                throw error;
-            res.status(201).json({ message: "Agregado a favorito correctamente" });
-        });
-    }
-    catch (error) {
-        console.log(error);
-        return res.status(500).json(error);
-    }
-}
-exports.addFav = addFav;
-function getFavByRut(req, res) {
-    let rutUser = req.body.rutUser;
-    try {
-        database_1.default.query("Select * FROM Favorito where rut = ?", [rutUser], (error, results) => {
-            if (error)
-                throw error;
-            res.status(201).send(results);
-        });
-    }
-    catch (error) {
-        console.log(error);
-        return res.status(500).json(error);
-    }
-}
-exports.getFavByRut = getFavByRut;

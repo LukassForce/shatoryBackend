@@ -25,12 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const router = (0, express_1.Router)();
-const authController = __importStar(require("../controllers/auth.controller"));
-const checkSignUp = __importStar(require("../middlewares/checkSignUp"));
-const checkToken = __importStar(require("../middlewares/checkToken"));
-router.post('/signIn', authController.signIn);
-router.post('/signUp', [checkSignUp.checkDuplicateUser], authController.signUp);
-//router.get('/profile', [checkToken.checkToken], authController.getProfile);
-router.get('/getAllProfile', authController.listar);
-router.get('/getProfile', [checkToken.checkToken], authController.getProfile);
+const favoriteController = __importStar(require("../controllers/favorite.controller"));
+router.post('/addFavorite', favoriteController.addFav);
+router.get('/getFavorite/:rut', favoriteController.getFavByRut);
 exports.default = router;
