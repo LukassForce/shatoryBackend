@@ -1,7 +1,7 @@
 export interface Evento {
     id?: number;
     nombreEvento: string;
-    locacion: string;
+    precio: number;
     fecha: string;
     idLoc: number;
     idArt: number;

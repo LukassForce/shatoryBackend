@@ -31,8 +31,28 @@ export function getFavByRut(req: any, res: any) {
 
             if (error) throw error;
             
-            res.status(201).send(results[0])
+            res.status(200).send(results[0])
         })
+
+    } catch (error) {
+
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+
+export function deleteFav(req: any, res: any) {
+
+    let rutUser = req.body.rutUser;
+    let idArtist = req.body.idArtist;
+
+    try {
+
+        connection.query("DELETE FROM Favorito WHERE rutUser = (?) AND idArtista = (?)", [rutUser, idArtist], (error: any, results: any) => {
+
+            if (error) throw error;
+            res.status(200).json({ message: "Eliminado de favorito correctamente" })
+        });
 
     } catch (error) {
 

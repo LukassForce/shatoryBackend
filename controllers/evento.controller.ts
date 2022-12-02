@@ -7,7 +7,7 @@ export function addEvento(req: any, res: any){
         
         const newEvento: Evento = {
             nombreEvento: req.body.nombreEvento,
-            locacion: req.body.locacion,
+            precio: req.body.precio,
             fecha: req.body.fecha,
             idLoc: req.body.idLoc,
             idArt: req.body.idArt
@@ -86,7 +86,7 @@ export function updateEventoById(req: any, res: any){
     
     const updatedEvento: any = { 
         nombreEvento: req.body.nombreEvento,
-        locacion: req.body.locacion,
+        precio: req.body.precio,
         fecha: req.body.fecha,
         idEvento: req.body.idEvento,
         idLoc: req.body.idLoc
