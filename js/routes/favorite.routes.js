@@ -28,4 +28,6 @@ const router = (0, express_1.Router)();
 const favoriteController = __importStar(require("../controllers/favorite.controller"));
 router.post('/addFavorite', favoriteController.addFav);
 router.get('/getFavorite/:rut', favoriteController.getFavByRut);
+router.get('/getFavorite/:rut/:idArtist', favoriteController.getFavByRutAndIdArtist);
+router.delete('/deleteFavorite/:rut/:idArtist', favoriteController.deleteFav);
 exports.default = router;

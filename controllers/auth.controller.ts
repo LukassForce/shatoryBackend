@@ -100,7 +100,6 @@ export const listar = async (req: any, res: any) => {
             }
             res.status(200).send(results);
         })
-
     }
     catch (error) {
         console.log(error);

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateEventoById = exports.deleteEventoById = exports.getAllEvento = exports.getEventoById = exports.addEvento = void 0;
+exports.updateEventoById = exports.deleteEventoById = exports.getAllEvento = exports.getEventoByIdArtist = exports.addEvento = void 0;
 const database_1 = __importDefault(require("../database"));
 function addEvento(req, res) {
     try {
@@ -27,10 +27,10 @@ function addEvento(req, res) {
     }
 }
 exports.addEvento = addEvento;
-function getEventoById(req, res) {
-    let idEvento = req.params.id;
+function getEventoByIdArtist(req, res) {
+    let idArtist = req.params.id;
     try {
-        database_1.default.query("SELECT * from evento where idEvento = ()", (idEvento), (error, results) => {
+        database_1.default.query("SELECT * from evento where idArt = ()", (idArtist), (error, results) => {
             if (error)
                 throw error;
             if (!results)
@@ -43,7 +43,7 @@ function getEventoById(req, res) {
         return res.status(500).json(error);
     }
 }
-exports.getEventoById = getEventoById;
+exports.getEventoByIdArtist = getEventoByIdArtist;
 function getAllEvento(req, res) {
     try {
         database_1.default.query("SELECT * FROM evento", (error, results) => {

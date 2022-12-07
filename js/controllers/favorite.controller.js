@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFav = exports.getFavByRut = exports.addFav = void 0;
+exports.deleteFav = exports.getFavByRutAndIdArtist = exports.getFavByRut = exports.addFav = void 0;
 const database_1 = __importDefault(require("../database"));
 function addFav(req, res) {
     let rutUser = req.body.rutUser;
@@ -36,6 +36,24 @@ function getFavByRut(req, res) {
     }
 }
 exports.getFavByRut = getFavByRut;
+function getFavByRutAndIdArtist(req, res) {
+    let rutUser = req.params.rut;
+    let idArtist = req.params.idArtist;
+    try {
+        database_1.default.query("SELECT * FROM Favorito WHERE rutUser = (?) AND idArtista = (?)", [rutUser, idArtist], (error, results) => {
+            if (error)
+                throw error;
+            if (!results.length)
+                return res.status(400).json({ message: "No se encuentra relacion" });
+            res.status(200).send(results);
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json(error);
+    }
+}
+exports.getFavByRutAndIdArtist = getFavByRutAndIdArtist;
 function deleteFav(req, res) {
     let rutUser = req.body.rutUser;
     let idArtist = req.body.idArtist;

@@ -25,13 +25,13 @@ export function addEvento(req: any, res: any){
     }
 }
 
-export function getEventoById(req: any, res: any){
+export function getEventoByIdArtist(req: any, res: any){
 
-    let idEvento = req.params.id;
+    let idArtist = req.params.id;
 
     try {
         
-        connection.query("SELECT * from evento where idEvento = ()", (idEvento), (error: any, results:any )=>{
+        connection.query("SELECT * from evento where idArt = ()", (idArtist), (error: any, results:any) => {
             if(error) throw error;
             if(!results) return res.status(400).json({message: "No existe informacion de este evento"});
             
