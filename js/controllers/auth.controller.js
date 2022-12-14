@@ -47,7 +47,8 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             lastName: req.body.lastName,
             password: req.body.password,
             email: req.body.email,
-            rut: req.body.rut
+            rut: req.body.rut,
+            rol: req.body.rol
         };
         newUser.password = yield passwordEncryptor.encryptPassword(req.body.password);
         database_1.default.query("INSERT INTO usuario SET ?", [newUser], function (error, results) {

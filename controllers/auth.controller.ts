@@ -14,7 +14,8 @@ export const signUp = async (req: any, res: any) => {
             lastName: req.body.lastName,
             password: req.body.password,
             email: req.body.email,
-            rut: req.body.rut
+            rut: req.body.rut,
+            rol: req.body.rol
         };
 
         newUser.password = await passwordEncryptor.encryptPassword(req.body.password);

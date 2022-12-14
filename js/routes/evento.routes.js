@@ -27,7 +27,7 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 const eventoController = __importStar(require("../controllers/evento.controller"));
 router.post('/addEvento', eventoController.addEvento);
-router.get('/getEvento/:id', eventoController.getEventoByIdArtist);
+router.get('/getEvento/:id', eventoController.getEventoById);
 router.get('/getAllEvento', eventoController.getAllEvento);
 router.delete('/deleteEvento/:id', eventoController.deleteEventoById);
 router.put('/updateEvento/:id', eventoController.updateEventoById);
