@@ -6,8 +6,8 @@ import * as artistController from '../controllers/artistas.controller';
 router.get('/getRandom', artistController.getRandomArtists);
 router.post('/', artistController.createArtist);
 router.get('/', artistController.getAllArtists);
-router.get('/:id', artistController.getArtistsById);
-router.delete('/:id', artistController.deleteArtistById);
-router.put('/:id', artistController.updateArtistById);
+router.get('/getArtistById/:id', artistController.getArtistsById);
+router.delete('/deleteArtistById/:id', artistController.deleteArtistById);
+router.put('/updateArtistById/:id', artistController.updateArtistById);
 
 export default router;

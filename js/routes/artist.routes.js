@@ -29,7 +29,7 @@ const artistController = __importStar(require("../controllers/artistas.controlle
 router.get('/getRandom', artistController.getRandomArtists);
 router.post('/', artistController.createArtist);
 router.get('/', artistController.getAllArtists);
-router.get('/:id', artistController.getArtistsById);
-router.delete('/:id', artistController.deleteArtistById);
-router.put('/:id', artistController.updateArtistById);
+router.get('/getArtistById/:id', artistController.getArtistsById);
+router.delete('/deleteArtistById/:id', artistController.deleteArtistById);
+router.put('/updateArtistById/:id', artistController.updateArtistById);
 exports.default = router;
