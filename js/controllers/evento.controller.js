@@ -11,6 +11,7 @@ function addEvento(req, res) {
             nombreEvento: req.body.nombreEvento,
             precio: req.body.precio,
             fecha: req.body.fecha,
+            imagenEvento: req.body.imagenEvento,
             idLoc: req.body.idLoc,
             idArt: req.body.idArt
         };
@@ -83,6 +84,7 @@ function updateEventoById(req, res) {
         nombreEvento: req.body.nombreEvento,
         precio: req.body.precio,
         fecha: req.body.fecha,
+        imagenEvento: req.body.imagenEvento,
         idEvento: req.body.idEvento,
         idLoc: req.body.idLoc
     };
