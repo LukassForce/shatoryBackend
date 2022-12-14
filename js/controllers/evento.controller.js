@@ -34,9 +34,10 @@ function getEventoById(req, res) {
         database_1.default.query("SELECT * from evento where idEvento = (?)", (idEvento), (error, results) => {
             if (error)
                 throw error;
-            if (!results)
+            if (!results[0]) {
                 return res.status(400).json({ message: "No existe informacion de este evento" });
-            res.status(200).send(results);
+            }
+            res.status(200).send(results[0]);
         });
     }
     catch (error) {
