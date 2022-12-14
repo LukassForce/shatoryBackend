@@ -5,10 +5,10 @@ export function createArtist(req: any, res: any) {
 
     try {
 
-        const newArtist: Artist = { 
-            nombreArtista: req.body.nombreArtista, 
-            descripcion: req.body.descripcion, 
-            linkImagen: req.body.linkImagen 
+        const newArtist: Artist = {
+            nombreArtista: req.body.nombreArtista,
+            descripcion: req.body.descripcion,
+            linkImagen: req.body.linkImagen
         };
 
         connection.query("INSERT INTO artista SET ?", [newArtist], function (error: any, results: any) {
@@ -46,6 +46,8 @@ export function getArtistsById(req: any, res: any) {
     let idArtist = req.params.id;
     try {
         connection.query('CALL getArtistById(?)', [idArtist], (error: any, results: any) => {
+            if (error) throw error;
+            if (!results[0]) return res.status(400).json({ message: "No existe informacion del artista" });
             res.status(200).send(results[0]);
         });
 
@@ -74,7 +76,12 @@ export function deleteArtistById(req: any, res: any) {
 export function updateArtistById(req: any, res: any) {
 
     let id: number = req.params.id;
-    const updatedArtist: any = { nombreArtista: req.body.nombreArtista, descripcion: req.body.descripcion, linkImagen: req.body.linkImagen };
+
+    const updatedArtist: any = { 
+        nombreArtista: req.body.nombreArtista, 
+        descripcion: req.body.descripcion, 
+        linkImagen: req.body.linkImagen 
+    };
 
     try {
 
@@ -90,17 +97,14 @@ export function updateArtistById(req: any, res: any) {
 export function getRandomArtists(req: any, res: any) {
 
     try {
-        
+
         connection.query("select * from artista order by rand() limit 3;", (error: any, results: any) => {
 
-            console.log(results);
-        
             res.status(200).send(results);
-
         });
 
     } catch (error) {
-            
+
         return res.status(500).json(error);
     }
 }

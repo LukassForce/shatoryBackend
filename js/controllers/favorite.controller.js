@@ -55,8 +55,8 @@ function getFavByRutAndIdArtist(req, res) {
 }
 exports.getFavByRutAndIdArtist = getFavByRutAndIdArtist;
 function deleteFav(req, res) {
-    let rutUser = req.body.rutUser;
-    let idArtist = req.body.idArtist;
+    let rutUser = req.params.rut;
+    let idArtist = req.params.idArtist;
     try {
         database_1.default.query("DELETE FROM Favorito WHERE rutUser = (?) AND idArtista = (?)", [rutUser, idArtist], (error, results) => {
             if (error)

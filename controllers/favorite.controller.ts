@@ -64,8 +64,8 @@ export function getFavByRutAndIdArtist(req: any, res: any) {
 
 export function deleteFav(req: any, res: any) {
 
-    let rutUser = req.body.rutUser;
-    let idArtist = req.body.idArtist;
+    let rutUser = req.params.rut;
+    let idArtist = req.params.idArtist;
 
     try {
 

@@ -48,6 +48,10 @@ function getArtistsById(req, res) {
     let idArtist = req.params.id;
     try {
         database_1.default.query('CALL getArtistById(?)', [idArtist], (error, results) => {
+            if (error)
+                throw error;
+            if (!results[0])
+                return res.status(400).json({ message: "No existe informacion del artista" });
             res.status(200).send(results[0]);
         });
     }
@@ -72,7 +76,11 @@ function deleteArtistById(req, res) {
 exports.deleteArtistById = deleteArtistById;
 function updateArtistById(req, res) {
     let id = req.params.id;
-    const updatedArtist = { nombreArtista: req.body.nombreArtista, descripcion: req.body.descripcion, linkImagen: req.body.linkImagen };
+    const updatedArtist = {
+        nombreArtista: req.body.nombreArtista,
+        descripcion: req.body.descripcion,
+        linkImagen: req.body.linkImagen
+    };
     try {
         database_1.default.query("UPDATE artista SET ? WHERE ID = ?", [updatedArtist, id], (req_, results) => {
             res.status(200).send('Artista actualizado');
@@ -86,7 +94,6 @@ exports.updateArtistById = updateArtistById;
 function getRandomArtists(req, res) {
     try {
         database_1.default.query("select * from artista order by rand() limit 3;", (error, results) => {
-            console.log(results);
             res.status(200).send(results);
         });
     }
