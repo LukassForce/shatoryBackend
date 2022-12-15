@@ -8,4 +8,6 @@ export interface Local {
     instagram?: string;
     twitter?: string;
     linkImagen: string;
+    latitud: number;
+    longitud: number;
 }

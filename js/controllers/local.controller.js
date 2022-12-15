@@ -15,7 +15,9 @@ function createLocal(req, res) {
             facebook: req.body.facebook,
             instagram: req.body.instagram,
             twitter: req.body.twitter,
-            linkImagen: req.body.linkImagen
+            linkImagen: req.body.linkImagen,
+            latitud: req.body.latitud,
+            longitud: req.body.longitud
         };
         database_1.default.query("INSERT INTO local SET ?", [newLocal], function (error, results) {
             if (error)
@@ -70,7 +72,9 @@ function updateLocal(req, res) {
         facebook: req.body.facebook,
         instagram: req.body.instagram,
         twitter: req.body.twitter,
-        linkImagen: req.body.linkImagen
+        linkImagen: req.body.linkImagen,
+        latitud: req.body.latitud,
+        longitud: req.body.longitud
     };
     let idLocal = req.param.idLocal;
     database_1.default.query("UPDATE local SET ? WHERE ID = ?", [updateLocal, idLocal], (req_, results) => {

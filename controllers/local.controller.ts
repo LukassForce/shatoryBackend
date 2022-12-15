@@ -14,7 +14,9 @@ export function createLocal(req: any, res: any) {
             facebook: req.body.facebook,
             instagram: req.body.instagram,
             twitter: req.body.twitter,
-            linkImagen: req.body.linkImagen
+            linkImagen: req.body.linkImagen,
+            latitud: req.body.latitud,
+            longitud: req.body.longitud
         };
 
         connection.query("INSERT INTO local SET ?", [newLocal], function (error: any, results: any) {
@@ -75,7 +77,9 @@ export function updateLocal(req: any, res: any) {
         facebook: req.body.facebook,
         instagram: req.body.instagram,
         twitter: req.body.twitter,
-        linkImagen: req.body.linkImagen
+        linkImagen: req.body.linkImagen,
+        latitud: req.body.latitud,
+        longitud: req.body.longitud
     };
 
     let idLocal: number = req.param.idLocal;
